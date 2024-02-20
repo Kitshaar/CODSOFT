@@ -36,7 +36,7 @@ int main()
 
         calc.displayResult();
 
-        choice = InputHandler::getCharInput("Do you want to perform another calculation? (y): ");
+        choice = InputHandler::getCharInput("Do you want to perform another calculation? (y/n): ");
 
     } while (choice == 'y');
 

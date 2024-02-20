@@ -73,6 +73,19 @@ int InputHandler::getIntInput(std::string_view prompt)
 
             continue;
         }
+        else if (value < 1 || value > 4)
+        {
+            // Clear the fail state of std::cin
+            std::cin.clear();
+
+            // Ignore any remaining characters in the input buffer
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            // Display an error message to the user
+            std::cout << "Invalid input. Please enter a valid number.\n";
+
+            continue;
+        }
         else
         {
             // If input is valid, ignore any remaining characters in the input buffer
@@ -115,6 +128,11 @@ char InputHandler::getCharInput(std::string_view prompt)
         }
         else if (runAgainTrigger != 'y')
         {
+            if (runAgainTrigger == 'n')
+            {
+                exit(0);
+            }
+
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
