@@ -60,7 +60,7 @@ Exiting the calculator program. Goodbye!
 
 
 ## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](../LICENSE.md)  file for details.
 
 ## Contact
 For questions, feedback, or support, please contact [Kartik Sharma](mailto:sharmakartik2322002@gmail.com).
