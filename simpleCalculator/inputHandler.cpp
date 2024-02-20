@@ -126,6 +126,16 @@ char InputHandler::getCharInput(std::string_view prompt)
 
             continue;
         }
+        else if (std::cin.peek() != '\n')
+        {
+            // If there are additional characters in the input buffer, clear them
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            // Display an error message to the user
+            std::cout << "Invalid input. Please enter a single character.\n";
+
+            continue;
+        }
         else if (runAgainTrigger != 'y')
         {
             if (runAgainTrigger == 'n')
