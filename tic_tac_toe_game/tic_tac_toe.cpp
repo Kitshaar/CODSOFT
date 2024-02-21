@@ -18,19 +18,19 @@ TicTacToe::TicTacToe()
 void TicTacToe::displayBoard()
 {
     std::system("cls"); // Clear the screen
-    std::cout << "Welcome to Tic-Tac-Toe!" << std::endl;
-    std::cout << "Player 1: X, Player 2: O" << std::endl;
-    std::cout << "Game Begins!" << std::endl;
+    std::cout << "Welcome to Tic-Tac-Toe!" << '\n';
+    std::cout << "Player 1: X, Player 2: O" << '\n';
+    std::cout << "Game Begins!" << '\n';
 
-    std::cout << "-------------" << std::endl;
+    std::cout << "-------------\n";
     for (int i = 0; i < 3; ++i)
     {
         for (int j = 0; j < 3; ++j)
         {
             std::cout << "| " << board[i][j] << " ";
         }
-        std::cout << "|" << std::endl;
-        std::cout << "-------------" << std::endl;
+        std::cout << "|\n";
+        std::cout << "-------------\n";
     }
 }
 
@@ -56,6 +56,11 @@ bool TicTacToe::makeMove(int position)
     return true; // Valid move
 }
 
+void TicTacToe::switchPlayer()
+{
+    currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+}
+
 int main()
 {
     TicTacToe game;
@@ -68,6 +73,7 @@ int main()
         int position{};
         std::cin >> position;
         game.makeMove(position);
+        game.switchPlayer();
         --trigger_for_test;
     }
     return 0;

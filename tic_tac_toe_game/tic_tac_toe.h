@@ -12,6 +12,7 @@ public:
     TicTacToe(); // Constructor
     void displayBoard();
     bool makeMove(int position);
+    void switchPlayer();
 };
 
 #endif
