@@ -34,9 +34,41 @@ void TicTacToe::displayBoard()
     }
 }
 
+bool TicTacToe::makeMove(int position)
+{
+    int row = (position - 1) / 3;
+    int col = (position - 1) % 3;
+    /*
+      position = 1
+      row = (1 - 1) / 3 = 0 / 3 = 0 (First row)
+      col = (1 - 1) % 3 = 0 % 3 = 0 (First column)
+
+      position = 5
+      row = (5 - 1) / 3 = 4 / 3 = 1 (Second row)
+      col = (5 - 1) % 3 = 4 % 3 = 1 (Second column)
+   */
+    if (board[row][col] == 'X' || board[row][col] == 'O')
+    {
+        return false; // Invalid move, position already taken
+    }
+    board[row][col] = currentPlayer;
+    ++moves;     // Increment moves count
+    return true; // Valid move
+}
+
 int main()
 {
     TicTacToe game;
-    game.displayBoard();
+    int trigger_for_test{3};
+    while (trigger_for_test > 0)
+    {
+
+        game.displayBoard();
+        std::cout << '\n';
+        int position{};
+        std::cin >> position;
+        game.makeMove(position);
+        --trigger_for_test;
+    }
     return 0;
 }

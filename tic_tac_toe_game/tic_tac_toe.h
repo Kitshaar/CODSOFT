@@ -11,6 +11,7 @@ private:
 public:
     TicTacToe(); // Constructor
     void displayBoard();
+    bool makeMove(int position);
 };
 
 #endif
