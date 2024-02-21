@@ -1,0 +1,37 @@
+Start Tic-Tac-Toe Game
+    Initialize 3x3 grid as game board
+    
+    Display Welcome Message
+    
+    Initialize players X and O
+    
+    Repeat until game over:
+        Display current state of the board
+        
+        Get current player's move:
+            Prompt player to enter row and column for their move
+            Handle invalid input
+            
+            Check if the chosen cell is already occupied
+                If occupied, display error message and prompt again
+                
+            Update game board with player's move
+        
+        Check for win:
+            Check rows, columns, and diagonals for matching symbols
+            If any line has all X's or all O's, declare the current player as the winner
+        
+        Check for draw:
+            If the board is full and no player has won, declare the game as a draw
+        
+        Switch players
+        
+    Display game result:
+        If there is a winner, display the winner
+        If it's a draw, display draw message
+    
+    Ask if players want to play again
+        If yes, reset the game board and continue
+        If no, end the game
+
+End Tic-Tac-Toe Game
