@@ -21,6 +21,7 @@ void TicTacToe::displayBoard()
     std::cout << "Welcome to Tic-Tac-Toe!" << '\n';
     std::cout << "Player 1: X, Player 2: O" << '\n';
     std::cout << "Game Begins!" << '\n';
+    std::cout << "Moves made so far: " << moves << '\n';
 
     std::cout << "-------------\n";
     for (int i = 0; i < 3; ++i)
@@ -96,24 +97,33 @@ bool TicTacToe::checkWin()
     return false; // No win
 }
 
+void TicTacToe::playGame()
+{
+    while (!isGameOver())
+    {
+        displayBoard(); // Display the current board
+        int position{};
+        std::cout << "Player " << currentPlayer << "'s turn. Enter position (1-9): ";
+        std::cin >> position;
+        if (position < 1 || position > 9 || !makeMove(position))
+        {
+            continue; // Prompt the player for a valid move
+        }
+        switchPlayer(); // Switch to the next player
+    }
+
+    displayBoard(); // Display the final board after the game ends
+
+    // Check the result of the game
+    if (checkWin())
+        std::cout << "Player " << currentPlayer << " wins! Congratulations!\n";
+    else
+        std::cout << "It's a draw! Game Over!\n";
+}
+
 int main()
 {
     TicTacToe game;
-    while (!game.isGameOver())
-    {
-        game.displayBoard();
-        std::cout << '\n';
-        int position{};
-        std::cin >> position;
-        game.makeMove(position);
-        game.switchPlayer();
-    }
-    game.displayBoard();
-
-    if (game.checkWin())
-        std::cout << "Someone won! Congratulations!" << std::endl;
-    else
-        std::cout << "It's a draw! Game Over!" << std::endl;
-
+    game.playGame();
     return 0;
 }

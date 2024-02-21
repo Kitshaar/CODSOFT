@@ -15,6 +15,7 @@ public:
     void switchPlayer();
     bool isGameOver();
     bool checkWin();
+    void playGame();
 };
 
 #endif
