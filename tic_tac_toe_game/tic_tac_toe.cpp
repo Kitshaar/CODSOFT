@@ -1,5 +1,6 @@
 #include "tic_tac_toe.h"
 #include <iostream>
+#include <limits>
 
 TicTacToe::TicTacToe()
 {
@@ -97,18 +98,72 @@ bool TicTacToe::checkWin()
     return false; // No win
 }
 
+int TicTacToe::intInputHandler()
+{
+    while (true)
+    {
+        int position{};
+        std::cout << "Player " << currentPlayer << "'s turn. Enter position (1-9): ";
+        std::cin >> position;
+
+        // Check if the read operation failed
+        if (!std::cin)
+        {
+            // Check if the end of the file is reached
+            if (std::cin.eof())
+            {
+                exit(0); // Exit the program gracefully if end of file is reached
+            }
+
+            // Clear the fail state of std::cin
+            std::cin.clear();
+
+            // Ignore any remaining characters in the input buffer
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            // Display an error message to the user
+            std::cout << "Invalid input. Please enter a single character.\n";
+            continue;
+        }
+        else if (std::cin.peek() != '\n')
+        {
+            // If there are additional characters in the input buffer, clear them
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            // Display an error message to the user
+            std::cout << "Invalid input. Please enter a single character.\n";
+
+            continue;
+        }
+        else if (position < 1 || position > 9 || !makeMove(position))
+        {
+            // Clear the fail state of std::cin
+            std::cin.clear();
+
+            // Ignore any remaining characters in the input buffer
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            // Display an error message to the user
+            std::cout << "Invalid input. Please enter a valid number.\n";
+
+            continue;
+        }
+        else
+        {
+            // If input is valid, ignore any remaining characters in the input buffer
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            // Return the valid input value
+            return position;
+        }
+    }
+}
+
 void TicTacToe::playGame()
 {
     while (!isGameOver())
     {
         displayBoard(); // Display the current board
-        int position{};
-        std::cout << "Player " << currentPlayer << "'s turn. Enter position (1-9): ";
-        std::cin >> position;
-        if (position < 1 || position > 9 || !makeMove(position))
-        {
-            continue; // Prompt the player for a valid move
-        }
+        int position{intInputHandler()};
         switchPlayer(); // Switch to the next player
     }
 

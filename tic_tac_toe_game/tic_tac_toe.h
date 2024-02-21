@@ -16,6 +16,7 @@ public:
     bool isGameOver();
     bool checkWin();
     void playGame();
+    int intInputHandler(); // Function to handle input player input
 };
 
 #endif
