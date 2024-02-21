@@ -13,6 +13,8 @@ public:
     void displayBoard();
     bool makeMove(int position);
     void switchPlayer();
+    bool isGameOver();
+    bool checkWin();
 };
 
 #endif

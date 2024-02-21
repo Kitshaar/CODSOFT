@@ -61,20 +61,59 @@ void TicTacToe::switchPlayer()
     currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
 }
 
+bool TicTacToe::isGameOver()
+{
+    return checkWin() || moves == 9;
+}
+
+bool TicTacToe::checkWin()
+{
+    // Check rows for a win
+    for (int i = 0; i < 3; ++i)
+    {
+        if (board[i][0] == board[i][1] && board[i][1] == board[i][2])
+        {
+            return true; // Row win
+        }
+    }
+
+    // Check columns for a win
+    for (int j = 0; j < 3; ++j)
+    {
+        if (board[0][j] == board[1][j] && board[1][j] == board[2][j])
+        {
+            return true; // Column win
+        }
+    }
+
+    // Check diagonals for a win
+    if ((board[0][0] == board[1][1] && board[1][1] == board[2][2]) ||
+        (board[0][2] == board[1][1] && board[1][1] == board[2][0]))
+    {
+        return true; // Diagonal win
+    }
+
+    return false; // No win
+}
+
 int main()
 {
     TicTacToe game;
-    int trigger_for_test{3};
-    while (trigger_for_test > 0)
+    while (!game.isGameOver())
     {
-
         game.displayBoard();
         std::cout << '\n';
         int position{};
         std::cin >> position;
         game.makeMove(position);
         game.switchPlayer();
-        --trigger_for_test;
     }
+    game.displayBoard();
+
+    if (game.checkWin())
+        std::cout << "Someone won! Congratulations!" << std::endl;
+    else
+        std::cout << "It's a draw! Game Over!" << std::endl;
+
     return 0;
 }
