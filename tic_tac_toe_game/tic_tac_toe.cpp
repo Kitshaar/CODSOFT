@@ -5,6 +5,14 @@
 TicTacToe::TicTacToe()
 {
     // Initialize the game board
+    initializeBoard();
+    currentPlayer = 'X'; // Player 'X' starts the game
+    moves = 0;           // No moves made yet
+}
+
+// Initialize the game board with placeholders
+void TicTacToe::initializeBoard()
+{
     for (int i = 0; i < 3; ++i)
     {
         for (int j = 0; j < 3; ++j)
@@ -12,10 +20,8 @@ TicTacToe::TicTacToe()
             board[i][j] = '1' + i * 3 + j; // Use placeholders '1' to '9'
         }
     }
-
-    currentPlayer = 'X'; // Player 'X' starts the game
-    moves = 0;           // No moves made yet
 }
+
 void TicTacToe::displayBoard()
 {
     std::system("cls"); // Clear the screen
@@ -176,9 +182,27 @@ void TicTacToe::playGame()
         std::cout << "It's a draw! Game Over!\n";
 }
 
+// Function to restart the game
+void TicTacToe::restart()
+{
+    initializeBoard();   // Reset the game board
+    currentPlayer = 'X'; // Player 'X' starts the game
+    moves = 0;
+}
+
 int main()
 {
     TicTacToe game;
-    game.playGame();
+    char choice{};
+    do
+    {
+        game.playGame();
+        std::cout << "Do you want to play again? (y/n): ";
+        std::cin >> choice;
+        if (std::tolower(choice) == 'y')
+        {
+            game.restart();
+        }
+    } while (std::tolower(choice) == 'y');
     return 0;
 }

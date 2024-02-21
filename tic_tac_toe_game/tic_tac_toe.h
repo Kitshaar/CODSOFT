@@ -10,13 +10,16 @@ private:
 
 public:
     TicTacToe(); // Constructor
+    void initializeBoard();
     void displayBoard();
     bool makeMove(int position);
     void switchPlayer();
     bool isGameOver();
     bool checkWin();
     void playGame();
-    int intInputHandler(); // Function to handle input player input
+    void restart();
+    char charInputHandler(); // Function to handle char player input
+    int intInputHandler();   // Function to handle integer player input
 };
 
 #endif
