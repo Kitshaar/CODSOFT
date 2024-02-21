@@ -104,6 +104,68 @@ bool TicTacToe::checkWin()
     return false; // No win
 }
 
+// Function to get a character input from the user with the provided prompt
+char TicTacToe::charInputHandler()
+{
+    while (true)
+    {
+        char runAgainTrigger{};
+        std::cin >> runAgainTrigger;
+
+        // Check if the read operation failed
+        if (!std::cin)
+        {
+            // Check if the end of the file is reached
+            if (std::cin.eof())
+            {
+                exit(0); // Exit the program gracefully if end of file is reached
+            }
+
+            // Clear the fail state of std::cin
+            std::cin.clear();
+
+            // Ignore any remaining characters in the input buffer
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            // Display an error message to the user
+            std::cout << "Invalid input. Please enter a valid character.\n";
+
+            continue;
+        }
+        else if (std::cin.peek() != '\n')
+        {
+            // If there are additional characters in the input buffer, clear them
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+            // Display an error message to the user
+            std::cout << "Invalid input. Please enter a single character.\n";
+
+            continue;
+        }
+        else if (runAgainTrigger != 'y')
+        {
+            if (runAgainTrigger == 'n')
+            {
+                exit(0);
+            }
+
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            // Display an error message to the user
+            std::cout << "Invalid input. Please enter the correct character.\n";
+            std::cout << "Note: Capslock might be ON.\n";
+            continue;
+        }
+        else
+        {
+            // If input is valid, ignore any remaining characters in the input buffer
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            // Return the valid input value
+            return runAgainTrigger;
+        }
+    }
+}
+
 int TicTacToe::intInputHandler()
 {
     while (true)
@@ -128,7 +190,7 @@ int TicTacToe::intInputHandler()
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
             // Display an error message to the user
-            std::cout << "Invalid input. Please enter a single character.\n";
+            std::cout << "Invalid input. Please enter a single number.\n";
             continue;
         }
         else if (std::cin.peek() != '\n')
@@ -137,7 +199,7 @@ int TicTacToe::intInputHandler()
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
             // Display an error message to the user
-            std::cout << "Invalid input. Please enter a single character.\n";
+            std::cout << "Invalid input. Please enter a single number between 1-9.\n";
 
             continue;
         }
@@ -170,16 +232,19 @@ void TicTacToe::playGame()
     {
         displayBoard(); // Display the current board
         int position{intInputHandler()};
+        // Check the result of the game
+        if (checkWin())
+        {
+            displayBoard();
+            std::cout << "Player " << currentPlayer << " wins! Congratulations!\n";
+            return;
+        }
+
         switchPlayer(); // Switch to the next player
     }
 
     displayBoard(); // Display the final board after the game ends
-
-    // Check the result of the game
-    if (checkWin())
-        std::cout << "Player " << currentPlayer << " wins! Congratulations!\n";
-    else
-        std::cout << "It's a draw! Game Over!\n";
+    std::cout << "It's a draw! Game Over!\n";
 }
 
 // Function to restart the game
@@ -188,21 +253,4 @@ void TicTacToe::restart()
     initializeBoard();   // Reset the game board
     currentPlayer = 'X'; // Player 'X' starts the game
     moves = 0;
-}
-
-int main()
-{
-    TicTacToe game;
-    char choice{};
-    do
-    {
-        game.playGame();
-        std::cout << "Do you want to play again? (y/n): ";
-        std::cin >> choice;
-        if (std::tolower(choice) == 'y')
-        {
-            game.restart();
-        }
-    } while (std::tolower(choice) == 'y');
-    return 0;
 }
