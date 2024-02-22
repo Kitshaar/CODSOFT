@@ -4,7 +4,9 @@
 
 #include "task.h"
 #include <iostream>
-#include <limits>
+#include <thread>
+#include <chrono>
+#include <cstdlib>
 
 // Class representing a to-do list
 class ToDoList
@@ -29,6 +31,8 @@ public:
 
     // Method to remove a task from the list
     bool removeTask(size_t index);
+
+    void clearScreenAfterDelay(int seconds);
 };
 
 #endif // TODOLIST_H

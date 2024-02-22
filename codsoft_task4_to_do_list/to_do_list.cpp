@@ -78,24 +78,14 @@ bool ToDoList::removeTask(size_t index)
     }
 }
 
-int main()
-{
-    ToDoList to_do;
-    to_do.viewTasks();
-    std::string desc{};
-    std::cout << "Enter task description: ";
-    std::getline(std::cin, desc); // Get task description
-    to_do.addTask(desc);
-    to_do.viewTasks();
-    size_t index{};
-    std::cout << "Enter task index to mark: ";
-    std::cin >> index;
-    to_do.markTaskAsCompleted(index);
-    to_do.viewTasks();
-    std::cout << "Enter task index to remove: ";
-    std::cin >> index; // Get task index from user
-    to_do.removeTask(index);
-    to_do.viewTasks();
+void ToDoList::clearScreenAfterDelay(int seconds) {
+    // Sleep for the specified duration
+    std::this_thread::sleep_for(std::chrono::seconds(seconds));
 
-    return 0;
+   #ifdef _WIN32
+        std::system("cls"); // For Windows
+    #else
+        std::system("clear"); // For Unix/Linux
+    #endif 
+    // Clear the screen after the delay
 }
