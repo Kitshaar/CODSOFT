@@ -1,0 +1,78 @@
+// TO-DO List Manager
+
+// Define a structure or class to represent a task
+Task:
+    String description
+    Boolean completed
+
+// Define an empty list to store tasks
+List<Task> tasks
+
+// Function to add a task to the list
+function addTask(description):
+    task = Task(description, false) // Create a new task with given description and mark it as incomplete
+    tasks.append(task) // Add the task to the list
+
+// Function to display all tasks with their status
+function viewTasks():
+    if tasks is empty:
+        print "No tasks found."
+    else:
+        for each task in tasks:
+            if task.completed:
+                print "[X] " + task.description // Display completed tasks with '[X]' prefix
+            else:
+                print "[ ] " + task.description // Display incomplete tasks with '[ ]' prefix
+
+// Function to mark a task as completed
+function markTaskAsCompleted(index):
+    if index is valid:
+        tasks[index].completed = true // Mark the task at given index as completed
+    else:
+        print "Invalid task index."
+
+// Function to remove a task from the list
+function removeTask(index):
+    if index is valid:
+        tasks.remove(index) // Remove the task at given index from the list
+    else:
+        print "Invalid task index."
+
+// Main program
+function main():
+    // Initialize an empty list of tasks
+    tasks = []
+
+    // Main loop for user interaction
+    repeat:
+        // Display menu options
+        print "TO-DO List Manager"
+        print "1. Add Task"
+        print "2. View Tasks"
+        print "3. Mark Task as Completed"
+        print "4. Remove Task"
+        print "5. Exit"
+        
+        // Prompt user for choice
+        choice = input("Enter your choice: ")
+
+        // Perform action based on user choice
+        switch choice:
+            case 1:
+                description = input("Enter task description: ")
+                addTask(description)
+            case 2:
+                viewTasks()
+            case 3:
+                index = input("Enter task index to mark as completed: ")
+                markTaskAsCompleted(index)
+            case 4:
+                index = input("Enter task index to remove: ")
+                removeTask(index)
+            case 5:
+                exit // Exit the program
+            default:
+                print "Invalid choice. Please try again."
+
+// Run the main program
+main()
