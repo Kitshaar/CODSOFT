@@ -33,6 +33,7 @@ public:
     bool removeTask(size_t index);
 
     void clearScreenAfterDelay(int seconds);
+    void display();
 };
 
 #endif // TODOLIST_H

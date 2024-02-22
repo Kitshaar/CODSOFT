@@ -78,14 +78,29 @@ bool ToDoList::removeTask(size_t index)
     }
 }
 
-void ToDoList::clearScreenAfterDelay(int seconds) {
+void ToDoList::clearScreenAfterDelay(int seconds)
+{
     // Sleep for the specified duration
     std::this_thread::sleep_for(std::chrono::seconds(seconds));
 
-   #ifdef _WIN32
-        std::system("cls"); // For Windows
-    #else
-        std::system("clear"); // For Unix/Linux
-    #endif 
+#ifdef _WIN32
+    std::system("cls"); // For Windows
+#else
+    std::system("clear"); // For Unix/Linux
+#endif
     // Clear the screen after the delay
+}
+
+void ToDoList::display()
+{
+    // Display menu options
+    std::cout << "\nTO-DO List Manager\n";
+    std::cout << "1. Add Task\n";
+    std::cout << "2. View Tasks\n";
+    std::cout << "3. Mark Task as Completed\n";
+    std::cout << "4. Remove Task\n";
+    std::cout << "5. Exit\n";
+
+    // Prompt user for choice
+    std::cout << "Enter your choice: ";
 }
