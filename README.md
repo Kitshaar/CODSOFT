@@ -13,6 +13,7 @@ The repository is organized into subdirectories, each containing assignments com
 - **Task1**: Contains the source code and documentation for Task 1, which involves developing a number guessing game in C++.
 - **Task2**: Contains the source code and documentation for Task 2, which involves creating a simple calculator program in C++ using object-oriented programming concepts.
 - **Task3**: Contains the source code and documentation for Task 3, which is the Tic-Tac-Toe game implemented in C++ using object-oriented programming principles.
+- **Task4**: Contains the source code and documentation for Task 4, which is the Console based ToDoList implemented in C++ using object-oriented programming principles.
 - **...**: Additional subdirectories can be added as new tasks are assigned and completed during the internship.
 
 ## How to Use
