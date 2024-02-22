@@ -27,6 +27,8 @@ int main()
         {
         case 1:
         { // Add Task
+            todo.clearScreenAfterDelay(0);
+            todo.viewTasks();
             std::string desc{};
             std::cout << "Enter task description: ";
             std::getline(std::cin >> std::ws, desc); // Get task description
@@ -36,13 +38,14 @@ int main()
         }
         case 2:
         { // View Tasks
+            todo.clearScreenAfterDelay(0);
             todo.viewTasks();
             std::cout << "To clear screen and continue, press (y): ";
             char counter{};
             std::cin >> counter;
             if (counter == 'y')
             {
-                todo.clearScreenAfterDelay(1);
+                todo.clearScreenAfterDelay(2);
             }
 
             break;
@@ -50,6 +53,8 @@ int main()
         case 3:
         { // Mark Task as Completed
             size_t index{};
+            todo.clearScreenAfterDelay(0);
+            todo.viewTasks();
             std::cout << "Enter task index to mark as completed: ";
             std::cin >> index; // Get task index from user
             if (todo.markTaskAsCompleted(index))
@@ -68,6 +73,8 @@ int main()
         case 4:
         { // Remove Task
             size_t index{};
+            todo.clearScreenAfterDelay(0);
+            todo.viewTasks();
             std::cout << "Enter task index to remove: ";
             std::cin >> index; // Get task index from user
             if (todo.removeTask(index))
